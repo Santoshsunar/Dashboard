@@ -1,0 +1,18 @@
+.btn-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.page{
+    padding:0.1rem 0.1rem;
+    border:1px #dcdcdc solid;
+    font-size: 0.5rem;
+    cursor: pointer;
+}
+
+@media only screen and (min-width:768px){    
+    .page{
+        padding:0.5rem 1rem;
+        font-size: inherit;
+    }
+}

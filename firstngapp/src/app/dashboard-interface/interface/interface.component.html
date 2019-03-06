@@ -1,0 +1,52 @@
+<div style='display: flex;width:100%;flex-direction: column;justify-content: space-between'>
+    <div class='header'>
+        <button class='btn-rule' id='add_more' (click)='addRule()' [disabled]='!tableRules.valid'>Add More Rule</button>
+        <app-search></app-search>
+    </div>
+    <div>
+        <div class='header div-box header-color'>
+            <div class='align-center width__5'>Sr No.</div>
+            <div class='align-center width__15'>Protocol</div>
+            <div class='align-center width__15'>Source Ip</div>
+            <div class='align-center width__15'>Destination Ip</div>
+            <div class='align-center width__15'>Access Type</div>
+            <div class='align-center width__15'>Action</div>
+        </div>
+        <div class='header'>
+            <form [formGroup]='ruleArray' class='body'>
+                <div formArrayName="rules" *ngFor="let rule of ruleArray.get('rules').controls; let i = index;">
+                    <div [formGroupName]="i" class='header content'>
+
+                        <div class='align-center width__5' >{{rulesArray.controls.length - i}}</div>
+                        <div class='align-center width__15'>
+                            <select id="{{i}}_protocol" formControlName="protocol" [ngClass]='rule.get("protocol").invalid ? "error" : ""'>
+                                <option value='' disabled selected>None</option>
+                                <option *ngFor='let protocol of protocols' value='{{protocol.value}}'>{{protocol.name}}</option>
+                            </select>
+                        </div>
+                        <div class='align-center width__15'>
+                            <input  id="{{i}}_sourceIp" formControlName="sourceIp" placeholder="Source IP" [ngClass]='rule.get("sourceIp").invalid ? "error" : ""'>
+
+                        </div>
+                        <div class='align-center width__15'>
+                            <input id="{{i}}_destinationIp" formControlName="destinationIp" placeholder="Destination IP" [ngClass]='rule.get("destinationIp").invalid ? "error" : ""'>
+                        </div>
+                        <div class='align-center width__15'>
+                            <select id="{{i}}_accessType" formControlName="accessType" [ngClass]='rule.get("accessType").invalid ? "error" : ""'>
+                                <option value='' disabled selected>None</option>
+                                <option *ngFor='let access of accessType' value='{{access.value}}'>{{access.name}}</option>
+                            </select>
+                        </div>
+                        <div id="{{i}}_delete" (click)='delete(i)' class='align-center width__15 delete'><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAM2SURBVGhD7VnLahRBFJ21b/H1FyrMdAVDYKArgSxcqUFByF7N1i8Yo24CLhSXIhHx8RE+FjE+iC71B3R8YGa6B+IskvHc9k4YJ7e6u/o5hDlwYOi+de85XdXVVTWVMcYYozj4M2eO+66a87Wz2NHO845Wr/D7A7Hjqpd0je55rrpAsdxsNLBeP3UI4hfA975WWxDfi0OKhalVaks5OF3xCAxodRtP2ZOEWtF12tRThRtC8XkMlR87BKWm04Shy1wmP/ycnNwPA49kERkSNb7X6/u4bLbw3YkTGM9rYuEcSBME1eTy2cCbPX0MT+mLVDBXoibVZhnpQMMJT+eTWKgA0myYyTDDC/hYKlAwl1lOMiDB/FDC0ph4NmtNTR3OZ4pNSqeZ6Dvz72MnJSyPvuvcZHnxQM5tv9gb1xd63btL4j2JFEttpHtGuqpl1Su0/hETGUiCen82eoTu/TtizCApJgDa2JrxdO0qy4wGhtVbKYnEQRN9hJnZNtGHpRkMrzcsMxzBUtxiFdu9t8SK/odkZocJBuUYjjURo2XTq1ePslwzEDgnJQijUeCAmTgxcenpifMs1wyaGaTGUQwTmqUJIkbMDZZrBgKfDTeMS5NgCUlNBHTVE5ZrBqbd12LjmIxjJpUJIrbNLNcMvCMfxcYWDDOT2gQIjWss1wwKkhrbcCSM7JqhhcDd8bLTaYbYOIImE3Q97J6UK4oYWg2WawaCdscHkfbIo75EaWvnCMsNB4bXqpREYvGLRrXCMqOB4GtSEhMHzcQZKttmLE0QPe1cYZnRCDZWrtOWEplIgnLfWGm1br3dRa/cEhKVyliLxWHwdrcpJSyDMPHt16w6wPLsQEcwUtIy6OvaRZaVDEiyPJy0aGKP9JDlJAcdV+J9eScVKIL0Keidre5hOelQ2iG2Vp8zO8TuI/hbgf4LlAtmThoFmZvog4YZeib3P3owQz3Ymjm5l8vmB5rNaDqURKQheuErev4SlykG9J2BoUXbFYBIV7VgovF7unqQ0xePwBDWZuAKuCkKFUix1IaOQEs1IIFOAL3p2jkIbOApP0VvvaAJIpgk8Juu0T2Kib0UH2OMMTJApfIXdHQ+5TJKT4cAAAAASUVORK5CYII="></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <div class='header'>
+            <div *ngIf='pageLength >= 1'>Showing 1 to {{pageLength}} of {{totalSize}} entries</div>
+            <app-pagination-options></app-pagination-options>
+        </div>
+    </div>
+</div>

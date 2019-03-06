@@ -1,0 +1,6 @@
+<div class='nav nav-position'>
+  <h1>Nubewell Networks</h1>
+  <div *ngFor='let navigationOption of navigationOptions' class='routes'>
+    <div class='route' [ngClass]='navigationOption.isSelected ? "selected" : ""' routerLink='{{navigationOption.path}}'>{{navigationOption.name}}</div>
+  </div>
+</div>
